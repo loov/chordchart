@@ -1,0 +1,133 @@
+@import 'open-sans/include.css';
+
+grid {
+	margin: 0 auto;
+	width: 16cm;
+
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+
+	display: grid;
+
+	--template-sig: max-content;
+	--template-bar: max-content;
+	--template-chord: 1fr;
+
+	grid-row-gap: 0;
+	grid-column-gap: 0.2em;
+
+	font-family: Open Sans;
+	font-size: 32px;
+	line-height: 1em;
+
+	justify-content: center;
+	align-content: center;
+}
+
+chord {
+	vertical-align: middle;
+
+	display: grid;
+}
+
+chord {
+	position: relative;
+	margin-top: 0.1em;
+	height: 1em;
+	grid-template:
+		"note accidental" 0.5em
+		"note alteration" 0.5em
+		".    alteration" 0.1em / max-content max-content;
+	align-content: baseline;
+}
+chord.with-root {
+	grid-template:
+		"note  accidental ." 0.5em
+		"note  alteration root" 0.3em
+		".     alteration root" 0.3em / max-content max-content max-content;
+}
+chord > .note {
+	grid-area: note;
+}
+chord > .accidental {
+	margin-top: -0.1em;
+	font-size: 0.7em;
+	line-height: 100%;
+	vertical-align: baseline;
+	grid-area: accidental;
+}
+chord > .alteration {
+	font-size: 0.5em;
+	line-height: 100%;
+	vertical-align: baseline;
+	grid-area: alteration;
+}
+chord > .root {
+	position: relative;
+	font-size: 0.7em;
+	line-height: 0.7em;
+	grid-area: root;
+	margin-top: 0.1em;
+}
+
+.tilt {
+	display: inline-block;
+	transform: skewY(-15deg);
+	font-size: 0.9em;
+}
+
+bar {
+	display: grid;
+	grid-template:
+		"line hi" 0.5em
+		"line lo" 0.5em / max-content max-content;
+
+	justify-content: left;
+	align-content: middle;
+	height: 1em;
+	margin-top: 0.1em;
+}
+.bar {
+	font-size: 1.25em;
+	line-height: 100%;
+}
+.hi, .lo {
+	margin-top: 0.1em;
+	font-size: 0.5em;
+	line-height: 100%;
+	margin-left: 0.1em;
+}
+.hi {
+	text-decoration: underline;
+}
+.line { grid-area: line; }
+.hi   { grid-area: hi; }
+.lo   { grid-area: lo; }
+
+spacer {
+	height: 0;
+}
+
+section {
+	font-size: 0.5em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	line-height: 1em;
+}
+section > .title {
+	color: white;
+	background-color: black;
+	padding: 0 0.25em;
+}
+
+heading1 {
+	text-align: left;
+	margin-bottom: 0.3em;
+}
+heading2 {
+	text-align: right;
+	font-style: italic;
+	font-size: 0.6em;
+	line-height: 0.6em;
+	margin-bottom: 0.5em;
+}

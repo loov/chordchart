@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Chord Chart</title>
+
+	<link rel="stylesheet" href="css/chart.css">
+	<script src="/~watch.js"></script>
+</head>
+<body>
+	<div id="page"></div>
+
+	<script src="render.js"></script>
+	<script type="text/javascript">
+		let input = `
+		# Untitled
+		## Artist
+
+		(Intro)
+		; 6/8 Ab . ; Asus4 . [ Ab E/A ; D/A . ]
+
+		(Verse 1)
+		[ A C#m(b5)/G# ; F#m7  C#m ; D .   ; Esus4 E ]
+
+		(Bridge 1)
+		; C#m7 .   ; F#m7  .   ; D E   ; A . ;
+
+		(Chorus 1)
+		[ A   .    ; Asus4 .   ; A E/A ; D/A . ]
+		
+		(Outro)
+		; D  . ; A . ;;.`;
+
+		let chart = new Chart();
+		chart.parse(input)
+		chart.render(document.getElementById("page"))
+	</script>
+</body>
+</html>

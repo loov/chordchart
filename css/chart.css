@@ -1,4 +1,5 @@
 @import 'open-sans/include.css';
+@import 'noto-music/include.css';
 
 grid {
 	margin: 0 auto;
@@ -16,7 +17,7 @@ grid {
 	grid-row-gap: 0;
 	grid-column-gap: 0.2em;
 
-	font-family: Open Sans;
+	font-family: Open Sans, Noto Music;
 	font-size: 32px;
 	line-height: 1em;
 

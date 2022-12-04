@@ -20,6 +20,18 @@ const accidental = {
 	"###": "\ue265",
 }
 
+const rest = {
+	0: "\ud834\udd3a",
+	1: "\ud834\udd3b",
+	2: "\ud834\udd3c",
+	4: "\ud834\udd3d",
+	8: "\ud834\udd3e",
+	16: "\ud834\udd3f",
+	32: "\ud834\udd40",
+	64: "\ud834\udd41",
+	128: "\ud834\udd42",
+}
+
 function renderAccidental(s) {
 	let el = document.createDocumentFragment();
 	let letters = s.split("");
@@ -66,6 +78,10 @@ class Chord {
 		if(chord == "%") {
 			return new Repeat();
 		}
+		if(chord[0] == "r") {
+			return Rest.parse(chord);
+		}
+
 
 		const reChord = /^([a-zA-Z])([b#]*)([^\/]*)(?:\/(.*))?$/;
 		const tokens = chord.match(reChord);
@@ -118,9 +134,26 @@ class Space {
 
 class Repeat {
 	render() {
-		let el = h.tag("chord");
-		el.innerText = "\ue500";
-		return el;
+		return h.tag("chord", "", h.text("\ue500"));
+	}
+}
+
+class Rest {
+	static parse(text) {
+		let m = text.match(/^r([0-9]*)(.*)$/);
+		return new Rest(parseInt(m[1]), m[2]);
+	}
+	constructor(duration, dot) {
+		this.duration = duration || 4;
+		const augmentDot = String.fromCodePoint(0x1D16D);
+		this.dot = "";
+		if(dot)
+			this.dot = dot.replaceAll(".", augmentDot);
+	}
+
+	render() {
+		let sym = rest[this.duration] || ("r" + duration);
+		return h.tag("chord", "", h.text(sym + this.dot));
 	}
 }
 

@@ -75,8 +75,8 @@ class Chord {
 		if(chord == "" || chord == ".") {
 			return new Space();
 		}
-		if(chord == "%") {
-			return new Repeat();
+		if(chord[0] == "%") {
+			return Repeat.parse(chord);
 		}
 		if(chord[0] == "r") {
 			return Rest.parse(chord);
@@ -133,8 +133,29 @@ class Space {
 }
 
 class Repeat {
+	static parse(text) {
+		let m = text.match("(%+)([0-9]*)");
+		if(m[2] == "") m[2] = "1"
+		return new Repeat(m[1].length, parseInt(m[2]))
+	}
+	constructor(count, measures) {
+		this.count = count;
+		this.measures = measures;
+	}
 	render() {
-		return h.tag("chord", "", h.text("\ue500"));
+		console.log(this.count, this.measures)
+		let p = "";
+		if(this.measures == 0) {
+			p = String.fromCodePoint(0x01d10D);
+		} else if (this.count <= 1) {
+			p = String.fromCodePoint(0x01d10E);
+		} else {
+			p = String.fromCodePoint(0x01d10F);
+		}
+
+		// TODO: support multibar repeat
+
+		return h.tag("chord", "", h.text(p));
 	}
 }
 
@@ -152,6 +173,8 @@ class Rest {
 	}
 
 	render() {
+		// TODO: support multibar repeat
+
 		let sym = rest[this.duration] || ("r" + duration);
 		return h.tag("chord", "", h.text(sym + this.dot));
 	}

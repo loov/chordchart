@@ -33,7 +33,6 @@ chord {
 
 chord {
 	position: relative;
-	margin-top: 0.1em;
 	height: 1em;
 	grid-template:
 		"note accidental" 0.5em
@@ -68,7 +67,6 @@ chord > .root {
 	font-size: 0.7em;
 	line-height: 0.7em;
 	grid-area: root;
-	margin-top: 0.1em;
 }
 
 .tilt {
@@ -84,16 +82,15 @@ bar {
 		"line lo" 0.5em / max-content max-content;
 
 	justify-content: left;
-	align-content: middle;
+	align-content: center;
 	height: 1em;
-	margin-top: 0.1em;
 }
-.bar {
-	font-size: 1.25em;
+.line {
+	margin-top: 0.1em;
+	font-size: 1em;
 	line-height: 100%;
 }
 .hi, .lo {
-	margin-top: 0.1em;
 	font-size: 0.5em;
 	line-height: 100%;
 	margin-left: 0.1em;
